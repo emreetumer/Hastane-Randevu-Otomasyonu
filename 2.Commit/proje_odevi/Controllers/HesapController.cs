@@ -1,0 +1,30 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using proje_odevi.Models;
+
+namespace proje_odevi.Controllers
+{
+    public class HesapController : Controller
+    {
+        public IActionResult Giris()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Giris(GirisViewModel model)
+        {
+            if (ModelState.IsValid) 
+            { 
+                //giriş işlemleri
+            }
+            return View(model);
+        }
+        public IActionResult Kayit()
+        {
+            return View();
+        }
+        public IActionResult Profil()
+        {
+            return View();
+        }
+    }
+}
