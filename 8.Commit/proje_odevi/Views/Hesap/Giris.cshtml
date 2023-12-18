@@ -1,0 +1,31 @@
+﻿@model GirisViewModel
+
+@{
+    ViewData["Title"] = "Giriş";
+}
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center pb-2">@ViewData["Title"]</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4 offset-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+            <div class="form-group mb-3">
+                <label asp-for="KullaniciAdi" class="form-label">Kullanıcı Adı:</label>
+                <input asp-for="KullaniciAdi"  class="form-control" placeholder="Adınızı Giriniz..." />
+                <span asp-validation-for="KullaniciAdi" class="text-danger small" ></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Sifre" class="form-label">Şifre:</label>
+                <input asp-for="Sifre" type="password" class="form-control" placeholder="Şifrenizi Giriniz..." />
+                <span asp-validation-for="Sifre" class="text-danger small"></span>
+            </div>
+            <div class="form-group d-grid mb-3">
+                <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-right-to-bracket me-2"></i>Giriş</button>
+            </div>
+        </form>
+    </div>
+</div>
