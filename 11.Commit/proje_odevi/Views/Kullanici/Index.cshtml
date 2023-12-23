@@ -1,0 +1,60 @@
+﻿@model List<KullaniciModel>
+@{
+    ViewData["Title"] = "Kullanicilar";
+}
+
+<div>
+    <div class="col">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+        <hr />
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <a asp-action="Olustur" class="btn btn-primary btn-sm"><i class="fa fa-plus me-2"></i>Doktor Ekle</a>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>AdSoyad</th>
+                    <th>KullanıcıAdı</th>
+                    <th>Kilit</th>
+                    <th>Rol</th>
+                    <th>Oluştur</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (KullaniciModel user in Model)
+                {
+                    <tr>
+                        <td>@user.AdSoyad</td>
+                        <td>@user.KullaniciAdi</td>
+                        <td>
+                            @if (user.Locked)
+                            {
+                                <i class="fa fa-check text-success"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-times text-danger"></i>
+                            }
+                        </td>
+                        <td>@user.Role</td>
+                        <td>@user.CreateAt</td>
+                        <td class="text-end">
+                            <a asp-action="Duzenle" asp-route-id="@user.Id" class="btn btn-info btn-sm text-white"><i class="fa fa-edit me-2"></i>Düzenle</a>
+                            <a asp-action="Kaldir" asp-route-id="@user.Id" class="btn btn-info btn-sm"><i class="fa fa-trash me-2"></i>Kaldır</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
