@@ -1,0 +1,24 @@
+﻿@model KlinikViewModel
+@{
+    ViewData["Title"] = "Klinik";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Klinik Ekle</title>
+</head>
+<body>
+    <h1>Klinik Ekle</h1>
+
+    <form asp-action="KlinikEkle" method="post">
+        <div class="form-group">
+            <label asp-for="KlinikAdi">Klinik Adı:</label>
+            <input asp-for="KlinikAdi" class="form-control" />
+            <span asp-validation-for="KlinikAdi" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Klinik Ekle</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿@model RandevuViewModel
+
+@{
+    ViewData["Title"] = "Randevu Al";
+}
+
+<div class="row">
+    <div class="col-4 offset-4">
+        <h1 class="display-4 border-bottom text-center pb-2">@ViewData["Title"]</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4 offset-4">
+        <form asp-action="RandevuEkle" method="post">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+            <div class="form-group mb-3">
+                <label asp-for="tarih" class="form-label">Randevu Tarihi:</label>
+                <input asp-for="tarih" class="form-control" placeholder="Tarih Ve Saati Giriniz..." />
+                <span asp-validation-for="tarih" class="text-danger small"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <label asp-for="klinik" class="form-label">Klinik:</label>
+                <select asp-for="klinik" class="form-control">
+                    <option value="">--- Klinik Seç ---</option>
+                    <option value="Dahiliye">Dahiliye</option>
+                    <option value="Üroloji">Üroloji</option>
+                    <option value="Kardiyoloji">Kardiyoloji</option>
+                    <option value="Kadın Doğum Hastalıkları">Kadın Doğum Hastalıkları</option>
+                    <option value="Cildiye">Cildiye</option>
+                    <option value="Kulak Burun Boğaz">Kulak Burun Boğaz</option>
+                    <option value="Çocuk Hastalıkları">Çocuk Hastalıkları</option>
+                </select>
+                <span asp-validation-for="klinik" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="SecilenDoktorId" class="form-label">Doktor:</label>
+                <select asp-for="SecilenDoktorId" asp-items="@ViewBag.Doktorlar" class="form-control">
+                    <option value="">--- Doktor Seç ---</option>
+                </select>
+                <span asp-validation-for="SecilenDoktorId" class="text-danger small"></span>
+            </div>
+
+            <div class="form-group d-grid mb-3">
+                <button type="submit" class="btn btn-primary d-block"><i class="fa-solid fa-right-to-bracket me-2"></i>Randevu Al</button>
+            </div>
+
+        </form>
+    </div>
+</div>

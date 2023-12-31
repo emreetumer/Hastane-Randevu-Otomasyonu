@@ -1,0 +1,34 @@
+﻿@model List<RandevuViewModel>
+
+@{
+    ViewData["Title"] = "Randevularim";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Klinik</th>
+                <th>Doktor</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var randevu in Model)
+            {
+                <tr>
+                    <td>@randevu.tarih.ToShortDateString()</td>
+                    <td>@randevu.klinik</td>
+                    <td>@randevu.Hekimler?.FirstOrDefault(d => d.ID == randevu.SecilenDoktorId)?.DoktorAdiSoyadi</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Henüz randevu almadınız.</p>
+}

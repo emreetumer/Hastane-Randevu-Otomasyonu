@@ -1,0 +1,30 @@
+﻿@model HekimViewModel
+@{
+    ViewData["Title"] = "Hekim";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doktor Ekle</title>
+</head>
+<body>
+    <h1>Doktor Ekle</h1>
+
+    <form asp-action="DoktorEkle" method="post">
+        <div class="form-group">
+            <label asp-for="DoktorAdiSoyadi">Doktor Adı Soyadı:</label>
+            <input asp-for="DoktorAdiSoyadi" class="form-control" />
+            <span asp-validation-for="DoktorAdiSoyadi" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Alani">Doktor Alanı:</label>
+            <input asp-for="Alani" class="form-control" />
+            <span asp-validation-for="Alani" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ekle</button>
+    </form>
+</body>
+</html>
