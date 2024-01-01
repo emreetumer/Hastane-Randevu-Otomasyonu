@@ -1,0 +1,81 @@
+﻿@model GirisViewModel
+
+@{
+    ViewData["Title"] = "Sisteme Giriş Yap";
+}
+
+<style>
+    body {
+        background-color: #f0f8ff; /* Açık mavi arkaplan rengi */
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card {
+        background-color: #fff; /* Beyaz kart arkaplan rengi */
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Gölgeli efekt */
+        padding: 30px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333; /* Başlık rengi */
+        font-size: 36px; /* Başlık font büyüklüğü */
+        margin-bottom: 30px;
+    }
+
+    label {
+        color: #555; /* Etiket rengi */
+        font-weight: bold;
+        font-size: 18px; /* Etiket font büyüklüğü */
+    }
+
+    .form-control {
+        border: 1px solid #ddd; /* Form kontrol çerçeve rengi */
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 16px; /* Form kontrol font büyüklüğü */
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Mavi renkli buton */
+        border: none;
+        border-radius: 8px;
+        font-size: 20px; /* Buton font büyüklüğü */
+        cursor: pointer;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Hover durumunda buton rengi */
+        }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="card shadow">
+                <h1 class="display-4">@ViewData["Title"]</h1>
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger small"></div>
+                    <div class="form-group mb-3">
+                        <label asp-for="KullaniciAdi" class="form-label">Kullanıcı Adı:</label>
+                        <input asp-for="KullaniciAdi" class="form-control" placeholder="Adınızı Giriniz..." />
+                        <span asp-validation-for="KullaniciAdi" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Sifre" class="form-label">Şifre:</label>
+                        <input asp-for="Sifre" type="password" class="form-control" placeholder="Şifrenizi Giriniz..." />
+                        <span asp-validation-for="Sifre" class="text-danger small"></span>
+                    </div>
+                    <div class="form-group d-grid mb-3">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-right-to-bracket me-2"></i>Giriş Yap</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

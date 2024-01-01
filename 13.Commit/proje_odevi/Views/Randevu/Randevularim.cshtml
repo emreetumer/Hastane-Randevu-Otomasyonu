@@ -1,0 +1,101 @@
+﻿@model List<RandevuViewModel>
+
+@{
+    ViewData["Title"] = "Kayıtlı Randevularım";
+}
+
+<style>
+    body {
+        background-color: #f0f8ff; /* Açık mavi arkaplan rengi */
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card {
+        background-color: #fff; /* Beyaz kart arkaplan rengi */
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Gölgeli efekt */
+        padding: 30px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        color: #333; /* Başlık rengi */
+        font-size: 36px; /* Başlık font büyüklüğü */
+        margin-bottom: 30px;
+    }
+
+    /* Tablo Tasarımı */
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+        .table th, .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2; /* Gri arkaplan rengi */
+        }
+
+    /* Mesaj Kutusu */
+    .message-box {
+        margin-top: 20px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+    }
+
+    /* Hata Mesajı Rengi */
+    .error-message {
+        color: #dc3545;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <!-- Kayıtlı Randevular Kısmı -->
+            <div class="card shadow">
+                <h1>@ViewData["Title"]</h1>
+
+                @if (Model != null && Model.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Klinik</th>
+                                <th>Doktor Adı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var randevu in Model)
+                            {
+                                <tr>
+                                    <td>@randevu.tarih.ToShortDateString()</td>
+                                    <td>@randevu.klinik</td>
+                                    <td>@randevu.Hekimler?.FirstOrDefault(d => d.ID == randevu.SecilenDoktorId)?.DoktorAdiSoyadi</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="message-box">
+                        <p class="error-message">Henüz randevu almadınız.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

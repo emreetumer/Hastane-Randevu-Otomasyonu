@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - proje_odevi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/lib/toastrjs/toastr.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/proje_odevi.styles.css" asp-append-version="true" />
+</head>
+<body class="search-background">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hastane Randevu Sistemi</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>*@
+                        
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li> *@
+
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Randevu" asp-action="Randevu"><i class="fa-sharp fa-solid"></i>Randevu Al</a>
+                        </li>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Randevu" asp-action="Randevu">
+                                    <i class="fa-sharp fa-solid"></i>Randevu Al
+                                </a>
+                               
+                            </li>
+                        }
+                        
+                           @* <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hekim" asp-action="Hekim">
+                                    <i class="fa-sharp fa-solid"></i>Hekim
+                                </a>
+
+                            </li>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Randevu" asp-action="Randevularim">
+                                    <i class="fa-sharp fa-solid"></i>Randevularım
+                                </a>
+                            </li>
+                        }
+                        
+                        
+                        
+                       @if (User.Identity.IsAuthenticated)
+                        {
+
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown ms-auto">
+                                    <a class="nav-link dropdown-toggle" asp-action="Index" asp-controller="Admin" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Admin
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a asp-action="Index" asp-controller="Kullanici" class="dropdown-item">Kullanıcı Listesi</a></li>
+                                        <li><a asp-action="Hekim" asp-controller="Hekim" class="dropdown-item">Yeni Doktor Ekle</a></li>
+                                        <li><a asp-action="Klinik" asp-controller="Klinik" class="dropdown-item">Klinik Ekle</a></li>
+                                    </ul>
+
+                                </li>
+
+                                @*<li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Hekim" asp-action="Hekim">
+                                        <i class="fa-sharp fa-solid"></i>Doktor Ekle
+                                    </a>
+
+                                </li>*@
+                            }
+                            <li class="nav-item ms-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hesap" asp-action="Profil"><i class="fa-sharp fa-solid fa-user"></i>
+                                    @User.FindFirst("KullaniciAdi").Value
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hesap" asp-action="Cikis"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Çıkış</a>
+                            </li>
+                        } 
+
+
+                        else
+                        {
+                            <li class="nav-item ms-auto">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hesap" asp-action="Giris"><i class="fa-sharp fa-solid fa-user"></i>Giriş Yap</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hesap" asp-action="Kayit"><i class="fa-sharp fa-solid fa-user"></i>Kayıt Ol</a>
+                            </li>
+                        }
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - proje_odevi - <a asp-area="" asp-controller="Hesap" asp-action="Giris">Randevu Sistemi</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toastrjs/toastr.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,149 @@
+﻿@{
+    ViewData["Title"] = "";
+}
+
+<style>
+    body {
+        background-color: #f0f8ff; /* Açık mavi arkaplan rengi */
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+    .card {
+        background-color: #fff; /* Beyaz kart arkaplan rengi */
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Gölgeli efekt */
+        padding: 30px;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333; /* Başlık rengi */
+        font-size: 36px; /* Başlık font büyüklüğü */
+        margin-bottom: 30px;
+    }
+
+    label {
+        color: #555; /* Etiket rengi */
+        font-weight: bold;
+        font-size: 18px; /* Etiket font büyüklüğü */
+    }
+
+    .form-control {
+        border: 1px solid #ddd; /* Form kontrol çerçeve rengi */
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 16px; /* Form kontrol font büyüklüğü */
+        text-align: center;
+    }
+
+    .form-select {
+        border: 1px solid #ddd; /* Dropdown çerçeve rengi */
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 16px; /* Dropdown font büyüklüğü */
+        text-align-last: center;
+    }
+
+    .text-danger {
+        color: #dc3545; /* Hata mesajı rengi */
+        font-size: 14px; /* Hata mesajı font büyüklüğü */
+    }
+
+    .btn-secondary {
+        background-color: #007bff; /* Mavi renkli buton */
+        border: none;
+        border-radius: 8px; /* Daha yuvarlak köşeler */
+        font-size: 14px; /* Buton font büyüklüğü küçültüldü */
+        cursor: pointer;
+        width: 100%; /* Butonun genişliği belirlendi */
+    }
+
+        .btn-secondary:hover {
+            background-color: #0056b3; /* Hover durumunda buton rengi */
+        }
+
+    .profile-image {
+        max-width: 150px;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="card shadow">
+                <h1 class="display-4">@ViewData["Title"]</h1>
+
+                <table class="table">
+                    <tr>
+                        <td class="col-6">
+                            <form method="post" asp-action="ProfilChangeAdSoyad">
+                                <div class="mb-4">
+                                    <h2>Hesap Ayarları</h2>
+                                    <hr />
+                                    <p class="small"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label small">Ad Soyad:</label>
+                                    <div class="input-group mb-3">
+                                        <input name="AdSoyad" type="text" class="form-control" placeholder="Kullanıcı Adı" value="@ViewData["AdSoyad"]" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <form method="post" asp-action="ProfilChangeSifre">
+                                <div class="form-group">
+                                    <label class="form-label small">Yeni Şifre:</label>
+                                    <div class="input-group">
+                                        <input name="Sifre" type="password" class="form-control" placeholder="Şifre" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+                                        </div>
+                                    </div>
+                                    @if (ViewData["Sonuc"] != null && ViewData["Sonuc"] == "ŞifreDeğiştirildi")
+                                    {
+                                        <spna class="text-success small">Şifre Güncellendi</spna>
+                                    }
+                                </div>
+                            </form>
+                        </td>
+                        <td class="col-6">
+                            <form method="post" asp-action="ProfilChangeResim" enctype="multipart/form-data">
+                                <div class="text-center mb-3">
+                                    <img src="~/uploads/@ViewData["ProfilResmi"]" width="150" class="img-thumbnail rounded-circle profile-image" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label class="form-label small">@*<span class="badge bg-danger ms-2">Zorunludur</span>*@</label>
+                                    <input type="file" name="file" class="form-control my-1" accept=".jpg, .jpeg" />
+                                    <div class="text-secondary">
+                                        <span class="small">
+                                            
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <button class="btn btn-secondary" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Kaydet</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @if (ViewData["Sonuc"] != null && ViewData["Sonuc"] == "ŞifreDeğiştirildi")
+    {
+        <script>
+            toastr["success"]("Şifre Değiştirilmiştir.", "Şifre Değişti!");
+        </script>
+    }
+}
+
